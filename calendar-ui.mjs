@@ -1,11 +1,9 @@
 const COLLABORATION_HUE = 272;
 const UNASSIGNED_HUE = 215;
 
-/** Use the writable picker only where the browser exposes it in HTTPS/localhost context. */
-export function getFilePickerStrategy(environment) {
-  return environment?.isSecureContext === true && typeof environment.showOpenFilePicker === 'function'
-    ? 'native'
-    : 'file-input';
+/** Always use the visible standard file chooser for a predictable editing flow. */
+export function getFilePickerStrategy() {
+  return 'file-input';
 }
 
 /** Turn picker failures into instructions users can act on. */
