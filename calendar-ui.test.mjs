@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildOwnerColorMap, describeFilePickerError, getFilePickerStrategy, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
+import { buildOwnerColorMap, canEditCalendar, describeFilePickerError, getFilePickerStrategy, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
 
 test('splits single and shared owners using common Chinese and English separators', () => {
   assert.deepEqual(splitOwners(' 方玉来、杨薇 '), ['方玉来', '杨薇']);
@@ -35,6 +35,13 @@ test('offers direct local-file saving only in a secure context with browser supp
   assert.equal(getFilePickerStrategy({ isSecureContext: true, showOpenFilePicker() {} }), 'native');
   assert.equal(getFilePickerStrategy({ isSecureContext: false, showOpenFilePicker() {} }), 'file-input');
   assert.equal(getFilePickerStrategy({ isSecureContext: true }), 'file-input');
+});
+
+test('enables direct editing only after write permission, while preserving the web-file fallback', () => {
+  assert.equal(canEditCalendar({ writeGranted: false }), false);
+  assert.equal(canEditCalendar({ writeGranted: true }), true);
+  assert.equal(canEditCalendar({ fileInputMode: true }), true);
+  assert.equal(canEditCalendar({ isMobile: true, writeGranted: true }), false);
 });
 
 test('explains picker cancellation and blocked access instead of failing silently', () => {

@@ -8,6 +8,11 @@ export function getFilePickerStrategy(environment) {
     : 'file-input';
 }
 
+/** Keep direct editing disabled until write access has been explicitly granted. */
+export function canEditCalendar({ isMobile = false, writeGranted = false, fileInputMode = false } = {}) {
+  return !isMobile && (writeGranted || fileInputMode);
+}
+
 /** Turn picker failures into instructions users can act on. */
 export function describeFilePickerError(error) {
   if (error?.name === 'AbortError') return '没有选择到日历文件。请使用兼容选择入口再试一次。';

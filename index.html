@@ -15,12 +15,12 @@
       <div id="statusBanner" class="status-banner" role="status" hidden></div><div id="calendar" aria-label="团队共享日历"></div>
       <footer class="calendar-footer"><div class="calendar-legends"><div id="ownerLegend" class="legend" aria-label="执行人颜色图例"></div><div class="status-legend" aria-label="任务状态图例"><span><i class="task-status-icon is-todo" aria-hidden="true">○</i>待办</span><span><i class="task-status-icon is-done" aria-hidden="true">✓</i>已完成</span></div></div><span id="syncStatus" class="muted">正在读取日历</span></footer>
     </section>
-    <p class="usage-note">电脑端优先点“连接本机文件并直接保存”，选中克隆仓库中的 calendar.json；首次保存时允许 Edge 写入该文件，之后保存会直接更新本机文件，再用 GitHub Desktop Commit 并 Push 即可同步。若浏览器不支持直连，可点兼容方式选文件，编辑后下载并替换仓库文件。手机页面仅供查看。</p>
+    <p class="usage-note">电脑端点“连接本机文件并直接保存”，选中克隆仓库中的 calendar.json；如果页面提示授权，点击“授权保存到本机文件”并允许访问后即可编辑。保存会更新本机文件，再用 GitHub Desktop Commit 并 Push 即可同步。若浏览器不支持直连，可点兼容方式选文件，编辑后下载并替换仓库文件。手机页面仅供查看。</p>
   </main>
   <dialog id="eventDialog" class="drawer"><form id="eventForm"><div class="dialog-head"><div><p class="eyebrow">WORK ITEM</p><h2 id="eventHeading">工作项</h2></div><button id="closeEvent" class="icon" aria-label="关闭" type="button">×</button></div>
     <label>工作项标题<input id="eventTitle" required maxlength="200" placeholder="这项工作需要完成什么？"></label><div class="form-row"><label>开始日期<input id="eventStart" type="date" required></label><label>结束日期<input id="eventEnd" type="date" required></label></div><p class="field-note">结束日期包含当天，跨日事项会显示为连续横条。</p>
     <div class="form-row"><label>执行人<input id="eventOwner" maxlength="80" placeholder="多人用顿号分隔，如：方玉来、杨薇"></label><label>状态<select id="eventStatus"><option value="todo">待办</option><option value="done">已完成</option></select></label></div><label>备注<textarea id="eventBody" rows="4" maxlength="10000" placeholder="补充工作说明…"></textarea></label>
-    <p id="eventError" class="error" role="alert"></p><div class="form-actions"><button id="deleteEvent" class="danger" type="button">删除工作项</button><button id="saveEvent" class="primary" type="submit">保存到本机文件</button></div>
+    <p id="eventError" class="error" role="alert"></p><div class="form-actions"><button id="deleteEvent" class="danger" type="button">删除工作项</button><button id="authorizeWriteInline" class="quiet" type="button" hidden>授权后重试保存</button><button id="saveEvent" class="primary" type="submit">保存到本机文件</button></div>
   </form></dialog>
   <dialog id="readDialog" class="drawer"><div class="dialog-head"><div><p class="eyebrow">WORK ITEM</p><h2 id="readTitle"></h2></div><button class="icon" data-close-read aria-label="关闭">×</button></div><p id="readDates" class="field-note"></p><p id="readOwner" class="field-note"></p><p id="readStatus" class="field-note"></p><p id="readBody" class="read-body"></p></dialog>
   <script>document.documentElement.classList.toggle('mobile-view',matchMedia('(max-width: 767px)').matches);</script>
