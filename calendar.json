@@ -1,17 +1,21 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-08T03:04:28.415Z",
+  "updated_at": "2026-10-08T03:31:17.907Z",
+  "owner_colors": {
+    "方玉来": 110,
+    "杨薇": 344
+  },
   "events": [
     {
       "id": "1",
       "title": "企客双表取数",
       "body": "",
-      "owner": "",
+      "owner": "方玉来",
       "start_date": "2026-10-08",
       "end_date": "2026-10-08",
       "status": "todo",
       "created_at": "2026-10-08T02:17:15.351333Z",
-      "updated_at": "2026-10-08T02:21:17.645538Z",
+      "updated_at": "2026-10-08T03:31:17.891Z",
       "deleted_at": null
     },
     {
@@ -20,10 +24,10 @@
       "body": "",
       "owner": "杨薇",
       "start_date": "2026-10-08",
-      "end_date": "2026-10-08",
+      "end_date": "2026-10-09",
       "status": "todo",
       "created_at": "2026-10-08T02:25:33.015967Z",
-      "updated_at": "2026-10-08T03:04:28.413Z",
+      "updated_at": "2026-10-08T03:30:00.848Z",
       "deleted_at": null
     },
     {
@@ -54,32 +58,32 @@
       "body": "",
       "owner": "方玉来",
       "start_date": "2026-10-09",
-      "end_date": "2026-10-09",
+      "end_date": "2026-10-10",
       "status": "todo",
       "created_at": "2026-10-08T03:01:40.971Z",
-      "updated_at": "2026-10-08T03:01:40.971Z"
+      "updated_at": "2026-10-08T03:30:08.134Z"
     },
     {
       "id": "43eaa355-7876-4a0c-af19-a6b7a4cabef2",
-      "title": "进企数据分析",
+      "title": "进企数据分析（双周会）",
       "body": "",
       "owner": "方玉来、杨薇",
-      "start_date": "2026-10-10",
+      "start_date": "2026-10-09",
       "end_date": "2026-10-10",
       "status": "todo",
       "created_at": "2026-10-08T03:02:05.735Z",
-      "updated_at": "2026-10-08T03:02:05.735Z"
+      "updated_at": "2026-10-08T03:30:16.460Z"
     },
     {
       "id": "7a0603b9-e032-4489-b81c-e0a37af7ba82",
       "title": "10月代发新客权益名单",
-      "body": "精准营销、上月领取数据分析结论",
+      "body": "下达精准营销：提前培训理财经理，结合88立减金，不要只说领取\n\n上月领取数据分析结论",
       "owner": "方玉来",
       "start_date": "2026-10-08",
       "end_date": "2026-10-10",
       "status": "todo",
       "created_at": "2026-10-08T03:02:50.561Z",
-      "updated_at": "2026-10-08T03:03:40.542Z"
+      "updated_at": "2026-10-08T03:29:52.639Z"
     },
     {
       "id": "a7e03165-2c52-41a8-900c-f092efc2c519",
@@ -91,6 +95,17 @@
       "status": "todo",
       "created_at": "2026-10-08T03:04:08.990Z",
       "updated_at": "2026-10-08T03:04:08.990Z"
+    },
+    {
+      "id": "4e62ad6a-0aab-45f3-8dfc-360a7727aa51",
+      "title": "100/300代发新客精准执行情况、通报",
+      "body": "",
+      "owner": "方玉来",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-22",
+      "status": "todo",
+      "created_at": "2026-10-08T03:27:47.984Z",
+      "updated_at": "2026-10-08T03:28:20.659Z"
     }
   ]
 }
