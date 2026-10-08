@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-08T02:36:18.352431+00:00",
+  "updated_at": "2026-10-08T03:04:28.415Z",
   "events": [
     {
       "id": "1",
@@ -18,13 +18,79 @@
       "id": "2",
       "title": "9月支行发薪日历",
       "body": "",
-      "owner": "",
+      "owner": "杨薇",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-08",
+      "status": "todo",
+      "created_at": "2026-10-08T02:25:33.015967Z",
+      "updated_at": "2026-10-08T03:04:28.413Z",
+      "deleted_at": null
+    },
+    {
+      "id": "b7623ddc-c2c6-4f72-a487-a373e71dc371",
+      "title": "10月上半月代发新中高端固化",
+      "body": "加上9月下半月达标客户匹一个10月的月日均，若10月月日均5w以上的，一并给支行做固化",
+      "owner": "方玉来",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-15",
+      "status": "todo",
+      "created_at": "2026-10-08T03:00:13.822Z",
+      "updated_at": "2026-10-08T03:00:13.822Z"
+    },
+    {
+      "id": "379b260f-8246-4e8b-9296-4b0c7e6943a3",
+      "title": "北交所打新提升",
+      "body": "",
+      "owner": "杨薇",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-10",
+      "status": "todo",
+      "created_at": "2026-10-08T03:01:04.791Z",
+      "updated_at": "2026-10-08T03:01:04.791Z"
+    },
+    {
+      "id": "c228742c-deab-481e-b3c1-66cab36ae8a9",
+      "title": "企微平移直营",
+      "body": "",
+      "owner": "方玉来",
       "start_date": "2026-10-09",
       "end_date": "2026-10-09",
       "status": "todo",
-      "created_at": "2026-10-08T02:25:33.015967Z",
-      "updated_at": "2026-10-08T02:25:33.015967Z",
-      "deleted_at": null
+      "created_at": "2026-10-08T03:01:40.971Z",
+      "updated_at": "2026-10-08T03:01:40.971Z"
+    },
+    {
+      "id": "43eaa355-7876-4a0c-af19-a6b7a4cabef2",
+      "title": "进企数据分析",
+      "body": "",
+      "owner": "方玉来、杨薇",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-10",
+      "status": "todo",
+      "created_at": "2026-10-08T03:02:05.735Z",
+      "updated_at": "2026-10-08T03:02:05.735Z"
+    },
+    {
+      "id": "7a0603b9-e032-4489-b81c-e0a37af7ba82",
+      "title": "10月代发新客权益名单",
+      "body": "精准营销、上月领取数据分析结论",
+      "owner": "方玉来",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-10",
+      "status": "todo",
+      "created_at": "2026-10-08T03:02:50.561Z",
+      "updated_at": "2026-10-08T03:03:40.542Z"
+    },
+    {
+      "id": "a7e03165-2c52-41a8-900c-f092efc2c519",
+      "title": "下周进企计划报送",
+      "body": "同步个贷、信用卡",
+      "owner": "方玉来",
+      "start_date": "2026-10-09",
+      "end_date": "2026-10-09",
+      "status": "todo",
+      "created_at": "2026-10-08T03:04:08.990Z",
+      "updated_at": "2026-10-08T03:04:08.990Z"
     }
   ]
 }
