@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-08T08:19:39.047Z",
+  "updated_at": "2026-10-08T10:23:50.393Z",
   "owner_colors": {
     "方玉来": 110,
-    "杨薇": 344
+    "杨薇": 344,
+    "段硕": 47
   },
   "events": [
     {
@@ -23,11 +24,11 @@
       "title": "9月支行发薪日历",
       "body": "",
       "owner": "杨薇",
-      "start_date": "2026-10-08",
-      "end_date": "2026-10-09",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-10",
       "status": "todo",
       "created_at": "2026-10-08T02:25:33.015967Z",
-      "updated_at": "2026-10-08T03:30:00.848Z",
+      "updated_at": "2026-10-08T10:23:50.392Z",
       "deleted_at": null
     },
     {
@@ -43,14 +44,14 @@
     },
     {
       "id": "379b260f-8246-4e8b-9296-4b0c7e6943a3",
-      "title": "北交所打新提升",
+      "title": "北交所打新提示",
       "body": "",
       "owner": "杨薇",
-      "start_date": "2026-10-10",
-      "end_date": "2026-10-10",
+      "start_date": "2026-10-09",
+      "end_date": "2026-10-09",
       "status": "todo",
       "created_at": "2026-10-08T03:01:04.791Z",
-      "updated_at": "2026-10-08T03:01:04.791Z"
+      "updated_at": "2026-10-08T10:19:45.496Z"
     },
     {
       "id": "c228742c-deab-481e-b3c1-66cab36ae8a9",
@@ -68,11 +69,11 @@
       "title": "进企数据分析（双周会）",
       "body": "",
       "owner": "方玉来、杨薇",
-      "start_date": "2026-10-09",
-      "end_date": "2026-10-10",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-13",
       "status": "todo",
       "created_at": "2026-10-08T03:02:05.735Z",
-      "updated_at": "2026-10-08T03:30:16.460Z"
+      "updated_at": "2026-10-08T10:19:34.575Z"
     },
     {
       "id": "7a0603b9-e032-4489-b81c-e0a37af7ba82",
@@ -125,9 +126,65 @@
       "owner": "方玉来",
       "start_date": "2026-10-08",
       "end_date": "2026-10-08",
-      "status": "done",
+      "status": "todo",
       "created_at": "2026-10-08T08:14:31.533Z",
-      "updated_at": "2026-10-08T08:19:39.039Z"
+      "updated_at": "2026-10-08T10:20:29.191Z"
+    },
+    {
+      "id": "eab2e790-8c51-4d58-b77f-0e4a7dbc11bd",
+      "title": "赵行稿",
+      "body": "",
+      "owner": "杨薇",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-12",
+      "status": "todo",
+      "created_at": "2026-10-08T09:05:47.263Z",
+      "updated_at": "2026-10-08T10:19:15.802Z"
+    },
+    {
+      "id": "01b683b3-438b-46c5-8bc2-1c6d47221315",
+      "title": "三季度总结四季度计划",
+      "body": "",
+      "owner": "方玉来，段硕",
+      "start_date": "2026-10-13",
+      "end_date": "2026-10-13",
+      "status": "todo",
+      "created_at": "2026-10-08T09:06:35.136Z",
+      "updated_at": "2026-10-08T09:06:35.136Z"
+    },
+    {
+      "id": "aafba688-5676-4e5d-826a-2dce4ba1c4ac",
+      "title": "大夕会ppt",
+      "body": "",
+      "owner": "杨薇",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-09",
+      "status": "todo",
+      "created_at": "2026-10-08T10:21:43.942Z",
+      "updated_at": "2026-10-08T10:23:32.701Z"
+    },
+    {
+      "id": "6146b3a6-def4-4a24-aaf6-021a51723fe4",
+      "title": "支行代发日历",
+      "body": "",
+      "owner": "杨薇",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-10",
+      "status": "todo",
+      "created_at": "2026-10-08T10:22:02.405Z",
+      "updated_at": "2026-10-08T10:23:42.381Z",
+      "deleted_at": "2026-10-08T10:23:42.381Z"
+    },
+    {
+      "id": "9f7d9c18-e65c-429c-af33-dd10bb66f195",
+      "title": "更新代发仪表盘、带四象限策略的企客双表",
+      "body": "完成支行下发",
+      "owner": "方玉来，杨薇",
+      "start_date": "2026-10-10",
+      "end_date": "2026-10-10",
+      "status": "todo",
+      "created_at": "2026-10-08T10:23:01.806Z",
+      "updated_at": "2026-10-08T10:23:01.806Z"
     }
   ]
 }
