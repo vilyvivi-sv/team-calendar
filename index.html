@@ -8,14 +8,14 @@
 <body>
   <header class="topbar"><div class="brand"><span class="brand-mark">日历</span><span>团队工作台</span></div><span class="read-only-label">团队共享日历</span></header>
   <main class="page">
-    <section class="intro"><div><p class="eyebrow">TEAM CALENDAR</p><h1>团队日历</h1><p class="muted">查看团队工作安排，了解事项负责人和进度。</p></div><button id="connectFile" class="primary desktop-only" type="button">连接电脑上的日历文件</button></section>
+    <section class="intro"><div><p class="eyebrow">TEAM CALENDAR</p><h1>团队日历</h1><p class="muted">查看团队工作安排，了解事项负责人和进度。</p></div><button id="connectFile" class="primary desktop-only" type="button">连接日历文件并开始编辑</button></section>
     <section class="calendar-panel">
       <div class="calendar-toolbar"><div class="date-navigation"><button id="prevButton" class="icon" aria-label="上一期">‹</button><button id="nextButton" class="icon" aria-label="下一期">›</button><button id="todayButton" class="quiet">今天</button><h2 id="calendarTitle"></h2></div><div id="views" class="segmented" aria-label="日历视图"><button data-view="dayGridMonth">月历</button><button data-view="dayGridWeek">周历</button><button data-view="listMonth">日程</button></div></div>
       <div class="filters"><label class="search-label"><span class="sr-only">搜索工作项</span><input id="search" type="search" placeholder="搜索工作项…" maxlength="200"></label><label><span class="sr-only">负责人筛选</span><select id="ownerFilter"><option value="">所有负责人</option></select></label><label><span class="sr-only">状态筛选</span><select id="statusFilter"><option value="">全部状态</option><option value="todo">待办</option><option value="doing">进行中</option><option value="done">已完成</option></select></label><button id="refreshButton" class="quiet" type="button">刷新</button></div>
       <div id="statusBanner" class="status-banner" role="status" hidden></div><div id="calendar" aria-label="团队共享日历"></div>
       <footer class="calendar-footer"><div class="legend"><span><i class="dot todo"></i>待办</span><span><i class="dot doing"></i>进行中</span><span><i class="dot done"></i>已完成</span></div><span id="syncStatus" class="muted">正在读取日历</span></footer>
     </section>
-    <p class="usage-note">手机页面仅供查看。电脑编辑需在已克隆的日历仓库中连接 calendar.json；保存后按团队现有 GitHub 流程提交并 push。</p>
+    <p class="usage-note">还不能编辑？先点击“连接日历文件并开始编辑”，在文件窗口中打开你克隆的仓库里的 <code>calendar.json</code>。连接成功后即可新增、修改或拖动事项。保存只写入本机文件；然后在 GitHub Desktop 中提交并点“Push origin”，团队成员 pull 后即可同步。手机页面仅供查看。</p>
   </main>
   <dialog id="eventDialog" class="drawer"><form id="eventForm"><div class="dialog-head"><div><p class="eyebrow">WORK ITEM</p><h2 id="eventHeading">工作项</h2></div><button id="closeEvent" class="icon" aria-label="关闭" type="button">×</button></div>
     <label>工作项标题<input id="eventTitle" required maxlength="200" placeholder="这项工作需要完成什么？"></label><div class="form-row"><label>开始日期<input id="eventStart" type="date" required></label><label>结束日期<input id="eventEnd" type="date" required></label></div><p class="field-note">结束日期包含当天，跨日事项会显示为连续横条。</p>
