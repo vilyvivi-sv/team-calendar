@@ -1,9 +1,11 @@
 const COLLABORATION_HUE = 272;
 const UNASSIGNED_HUE = 215;
 
-/** Always use the visible standard file chooser for a predictable editing flow. */
-export function getFilePickerStrategy() {
-  return 'file-input';
+/** Offer direct file writes only on secure pages with the File System Access API. */
+export function getFilePickerStrategy(environment) {
+  return environment?.isSecureContext === true && typeof environment.showOpenFilePicker === 'function'
+    ? 'native'
+    : 'file-input';
 }
 
 /** Turn picker failures into instructions users can act on. */

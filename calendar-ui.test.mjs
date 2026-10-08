@@ -31,8 +31,8 @@ test('assigns stable distinct colors to individual owners and a dedicated collab
   assert.equal(getOwnerPresentation('', colors).kind, 'unassigned');
 });
 
-test('uses the visible standard file chooser regardless of native file access support', () => {
-  assert.equal(getFilePickerStrategy({ isSecureContext: true, showOpenFilePicker() {} }), 'file-input');
+test('offers direct local-file saving only in a secure context with browser support', () => {
+  assert.equal(getFilePickerStrategy({ isSecureContext: true, showOpenFilePicker() {} }), 'native');
   assert.equal(getFilePickerStrategy({ isSecureContext: false, showOpenFilePicker() {} }), 'file-input');
   assert.equal(getFilePickerStrategy({ isSecureContext: true }), 'file-input');
 });
