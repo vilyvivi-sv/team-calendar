@@ -1,6 +1,22 @@
 const COLLABORATION_HUE = 272;
 const UNASSIGNED_HUE = 215;
 
+/** Use the writable picker only where the browser exposes it in HTTPS/localhost context. */
+export function getFilePickerStrategy(environment) {
+  return environment?.isSecureContext === true && typeof environment.showOpenFilePicker === 'function'
+    ? 'native'
+    : 'file-input';
+}
+
+/** Turn picker failures into instructions users can act on. */
+export function describeFilePickerError(error) {
+  if (error?.name === 'AbortError') return '没有选择到日历文件。请使用兼容选择入口再试一次。';
+  if (error?.name === 'NotAllowedError' || error?.name === 'SecurityError') {
+    return '浏览器阻止了直接连接文件。请使用兼容选择入口，继续用网页编辑。';
+  }
+  return `连接日历文件失败：${error?.message || '请确认选择的是克隆仓库中的 calendar.json。'}`;
+}
+
 /** Convert free-text owner entries into individual member names. */
 export function splitOwners(value) {
   return [...new Set(String(value || '').split(/[、，,；;]+/).map(name => name.trim()).filter(Boolean))];

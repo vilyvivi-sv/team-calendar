@@ -6,9 +6,9 @@
 
 1. 日历维护者把成员添加为本仓库协作者，并将仓库地址 `https://github.com/vilyvivi-sv/team-calendar` 分享给团队。
 2. 每位编辑者将仓库克隆到自己的电脑，之后每次开始编辑前先 pull。克隆到哪里由你选择，记住保存位置。
-3. 在 Edge 或 Chrome 打开上方日历网址，点击“连接日历文件并开始编辑”。文件窗口中找到刚才克隆的仓库目录，选中里面的 `calendar.json` 并授权。每位成员只需连接一次；若按本项目默认位置克隆，文件路径为 `D:\\codex\\SPDB Retail OS\\project\\工作台\\team_calendar\\github_pages_repo\\calendar.json`。
+3. 在 Edge 或 Chrome 打开上方日历网址，点击“连接日历文件并开始编辑”，在文件窗口选中克隆仓库里的 `calendar.json`。支持直接读写的浏览器会记住本机授权；若浏览器限制直接连接，使用兼容选择方式选同一个文件，仍可在网页编辑，完成后从网页下载更新文件并替换克隆仓库中的原文件。每位成员每次编辑前都应 pull 最新日历。
 4. 在月历或周历点击日期新建工作项；拖动事项可改期，拖动两端可调整跨日范围。手机默认显示日程列表，只能查看。
-5. 保存会写入本机 `calendar.json`，不会自动上传。打开 GitHub Desktop，选中日历仓库，在左下角 Summary 写更新说明，点 **Commit to main**，然后点右上角 **Push origin**。其他成员 pull 后，刷新网页即可看到更新。也可在仓库目录用命令行执行 `git add calendar.json`、`git commit -m "更新团队日历"`、`git push`。
+5. 直接连接模式下，保存会写入本机 `calendar.json`；兼容模式下，网页先保留编辑结果，最后点“下载更新后的日历文件”，再用下载文件替换仓库中的 `calendar.json`。然后打开 GitHub Desktop，选中日历仓库，在左下角 Summary 写更新说明，点 **Commit to main**，再点右上角 **Push origin**。其他成员 pull 后，刷新网页即可看到更新。
 
 GitHub Pages 使用默认网址，无需另购域名或租用服务器。Pages 会公开仓库中的页面和 `calendar.json`，任何访问者都可查看工作安排；不要写入密码、客户信息或其他不宜公开的内容。
 

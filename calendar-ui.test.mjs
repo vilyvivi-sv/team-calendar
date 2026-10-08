@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildOwnerColorMap, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
+import { buildOwnerColorMap, describeFilePickerError, getFilePickerStrategy, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
 
 test('splits single and shared owners using common Chinese and English separators', () => {
   assert.deepEqual(splitOwners(' 方玉来、杨薇 '), ['方玉来', '杨薇']);
@@ -29,4 +29,16 @@ test('assigns stable distinct colors to individual owners and a dedicated collab
   assert.equal(getOwnerPresentation('方玉来、杨薇', colors).kind, 'collaboration');
   assert.equal(getOwnerPresentation('方玉来', colors).kind, 'person');
   assert.equal(getOwnerPresentation('', colors).kind, 'unassigned');
+});
+
+test('uses the native writable picker only in a secure context with browser support', () => {
+  assert.equal(getFilePickerStrategy({ isSecureContext: true, showOpenFilePicker() {} }), 'native');
+  assert.equal(getFilePickerStrategy({ isSecureContext: false, showOpenFilePicker() {} }), 'file-input');
+  assert.equal(getFilePickerStrategy({ isSecureContext: true }), 'file-input');
+});
+
+test('explains picker cancellation and blocked access instead of failing silently', () => {
+  assert.match(describeFilePickerError({ name: 'AbortError' }), /兼容选择入口/);
+  assert.match(describeFilePickerError({ name: 'NotAllowedError' }), /兼容选择入口/);
+  assert.match(describeFilePickerError({ name: 'SecurityError' }), /兼容选择入口/);
 });
