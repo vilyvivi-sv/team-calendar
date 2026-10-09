@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-09T07:43:56.965Z",
+  "updated_at": "2026-10-09T09:09:25.356Z",
   "owner_colors": {
     "方玉来": 110,
     "杨薇": 344,
@@ -14,9 +14,9 @@
       "owner": "方玉来",
       "start_date": "2026-10-08",
       "end_date": "2026-10-09",
-      "status": "todo",
+      "status": "done",
       "created_at": "2026-10-08T02:17:15.351333Z",
-      "updated_at": "2026-10-09T02:01:53.873Z",
+      "updated_at": "2026-10-09T08:44:47.180Z",
       "deleted_at": null
     },
     {
@@ -24,11 +24,11 @@
       "title": "9月支行发薪日历",
       "body": "",
       "owner": "杨薇",
-      "start_date": "2026-10-10",
-      "end_date": "2026-10-10",
+      "start_date": "2026-10-09",
+      "end_date": "2026-10-09",
       "status": "todo",
       "created_at": "2026-10-08T02:25:33.015967Z",
-      "updated_at": "2026-10-08T10:23:50.392Z",
+      "updated_at": "2026-10-09T08:44:56.763Z",
       "deleted_at": null
     },
     {
@@ -49,9 +49,9 @@
       "owner": "杨薇",
       "start_date": "2026-10-09",
       "end_date": "2026-10-09",
-      "status": "todo",
+      "status": "done",
       "created_at": "2026-10-08T03:01:04.791Z",
-      "updated_at": "2026-10-08T10:19:45.496Z"
+      "updated_at": "2026-10-09T09:09:25.353Z"
     },
     {
       "id": "c228742c-deab-481e-b3c1-66cab36ae8a9",
@@ -179,12 +179,12 @@
       "id": "9f7d9c18-e65c-429c-af33-dd10bb66f195",
       "title": "更新代发仪表盘、带四象限策略的企客双表",
       "body": "完成支行下发",
-      "owner": "方玉来，杨薇",
-      "start_date": "2026-10-10",
+      "owner": "杨薇",
+      "start_date": "2026-10-09",
       "end_date": "2026-10-10",
       "status": "todo",
       "created_at": "2026-10-08T10:23:01.806Z",
-      "updated_at": "2026-10-08T10:23:01.806Z"
+      "updated_at": "2026-10-09T08:47:00.326Z"
     },
     {
       "id": "79204f24-6e12-411d-8c12-53ce17e23d20",
@@ -207,6 +207,17 @@
       "status": "todo",
       "created_at": "2026-10-09T06:45:34.505Z",
       "updated_at": "2026-10-09T06:45:34.505Z"
+    },
+    {
+      "id": "f5190575-22e0-4b7b-bcbf-f6fea6ddd7c1",
+      "title": "北交所打新提示",
+      "body": "",
+      "owner": "杨薇",
+      "start_date": "2026-10-13",
+      "end_date": "2026-10-13",
+      "status": "todo",
+      "created_at": "2026-10-09T08:32:04.976Z",
+      "updated_at": "2026-10-09T08:32:04.976Z"
     }
   ]
 }
