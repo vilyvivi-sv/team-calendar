@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-09T02:02:23.410Z",
+  "updated_at": "2026-10-09T03:11:57.100Z",
   "owner_colors": {
     "方玉来": 110,
     "杨薇": 344,
@@ -93,9 +93,9 @@
       "owner": "方玉来",
       "start_date": "2026-10-09",
       "end_date": "2026-10-09",
-      "status": "todo",
+      "status": "done",
       "created_at": "2026-10-08T03:04:08.990Z",
-      "updated_at": "2026-10-08T03:04:08.990Z"
+      "updated_at": "2026-10-09T03:10:50.185Z"
     },
     {
       "id": "4e62ad6a-0aab-45f3-8dfc-360a7727aa51",
@@ -185,6 +185,17 @@
       "status": "todo",
       "created_at": "2026-10-08T10:23:01.806Z",
       "updated_at": "2026-10-08T10:23:01.806Z"
+    },
+    {
+      "id": "79204f24-6e12-411d-8c12-53ce17e23d20",
+      "title": "IC卡换卡事项",
+      "body": "逐家支行沟通（暂定）",
+      "owner": "方玉来",
+      "start_date": "2026-10-14",
+      "end_date": "2026-10-14",
+      "status": "todo",
+      "created_at": "2026-10-09T03:11:57.098Z",
+      "updated_at": "2026-10-09T03:11:57.098Z"
     }
   ]
 }
