@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-09T03:11:57.100Z",
+  "updated_at": "2026-10-09T06:45:34.507Z",
   "owner_colors": {
     "方玉来": 110,
     "杨薇": 344,
@@ -159,9 +159,9 @@
       "owner": "杨薇",
       "start_date": "2026-10-08",
       "end_date": "2026-10-09",
-      "status": "todo",
+      "status": "done",
       "created_at": "2026-10-08T10:21:43.942Z",
-      "updated_at": "2026-10-08T10:23:32.701Z"
+      "updated_at": "2026-10-09T06:44:05.556Z"
     },
     {
       "id": "6146b3a6-def4-4a24-aaf6-021a51723fe4",
@@ -196,6 +196,17 @@
       "status": "todo",
       "created_at": "2026-10-09T03:11:57.098Z",
       "updated_at": "2026-10-09T03:11:57.098Z"
+    },
+    {
+      "id": "af1309ee-b12b-4324-92fc-6499ead1a745",
+      "title": "市场周例会",
+      "body": "首面数据问题告知支行\n",
+      "owner": "方玉来，杨薇",
+      "start_date": "2026-10-13",
+      "end_date": "2026-10-13",
+      "status": "todo",
+      "created_at": "2026-10-09T06:45:34.505Z",
+      "updated_at": "2026-10-09T06:45:34.505Z"
     }
   ]
 }
