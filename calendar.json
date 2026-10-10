@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-10T09:42:12.877Z",
+  "updated_at": "2026-10-10T09:48:21.553Z",
   "owner_colors": {
     "方玉来": 110,
     "杨薇": 344,
@@ -146,11 +146,11 @@
       "title": "三季度总结四季度计划",
       "body": "",
       "owner": "方玉来，段硕",
-      "start_date": "2026-10-13",
-      "end_date": "2026-10-13",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-12",
       "status": "todo",
       "created_at": "2026-10-08T09:06:35.136Z",
-      "updated_at": "2026-10-08T09:06:35.136Z"
+      "updated_at": "2026-10-10T09:48:21.549Z"
     },
     {
       "id": "aafba688-5676-4e5d-826a-2dce4ba1c4ac",
