@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-09T03:11:57.100Z",
+  "updated_at": "2026-10-12T01:02:39.243Z",
   "owner_colors": {
     "方玉来": 110,
     "杨薇": 344,
@@ -14,9 +14,9 @@
       "owner": "方玉来",
       "start_date": "2026-10-08",
       "end_date": "2026-10-09",
-      "status": "todo",
+      "status": "done",
       "created_at": "2026-10-08T02:17:15.351333Z",
-      "updated_at": "2026-10-09T02:01:53.873Z",
+      "updated_at": "2026-10-12T00:59:32.424Z",
       "deleted_at": null
     },
     {
@@ -126,9 +126,9 @@
       "owner": "方玉来",
       "start_date": "2026-10-08",
       "end_date": "2026-10-11",
-      "status": "todo",
+      "status": "done",
       "created_at": "2026-10-08T08:14:31.533Z",
-      "updated_at": "2026-10-09T02:01:20.564Z"
+      "updated_at": "2026-10-12T00:59:45.811Z"
     },
     {
       "id": "eab2e790-8c51-4d58-b77f-0e4a7dbc11bd",
@@ -196,6 +196,51 @@
       "status": "todo",
       "created_at": "2026-10-09T03:11:57.098Z",
       "updated_at": "2026-10-09T03:11:57.098Z"
+    },
+    {
+      "id": "bd36058d-29ad-48f1-b100-d7e9ba805aec",
+      "title": "三季度复盘，四季度计划稿",
+      "body": "",
+      "owner": "",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-12",
+      "status": "todo",
+      "created_at": "2026-10-12T01:00:27.561Z",
+      "updated_at": "2026-10-12T01:00:44.329Z",
+      "deleted_at": "2026-10-12T01:00:44.329Z"
+    },
+    {
+      "id": "04d92eda-5c0d-40fc-b1ba-91fd600d44c6",
+      "title": "代发升星催报",
+      "body": "方玉来",
+      "owner": "",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-12",
+      "status": "todo",
+      "created_at": "2026-10-12T01:01:10.182Z",
+      "updated_at": "2026-10-12T01:01:10.182Z"
+    },
+    {
+      "id": "b039c5fd-4209-4c66-b302-1edb83cf2e73",
+      "title": "权益领取汇总",
+      "body": "",
+      "owner": "",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-12",
+      "status": "todo",
+      "created_at": "2026-10-12T01:01:42.826Z",
+      "updated_at": "2026-10-12T01:01:42.826Z"
+    },
+    {
+      "id": "ec02bdcc-c73e-4039-b21b-c573731f5d9b",
+      "title": "100/300清单及精准营销准备",
+      "body": "",
+      "owner": "方玉来",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-12",
+      "status": "todo",
+      "created_at": "2026-10-12T01:02:39.232Z",
+      "updated_at": "2026-10-12T01:02:39.232Z"
     }
   ]
 }
