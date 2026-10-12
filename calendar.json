@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-10T09:48:21.553Z",
+  "updated_at": "2026-10-12T02:23:37.694Z",
   "owner_colors": {
     "方玉来": 110,
     "杨薇": 344,
@@ -133,13 +133,13 @@
     {
       "id": "eab2e790-8c51-4d58-b77f-0e4a7dbc11bd",
       "title": "赵行稿",
-      "body": "",
+      "body": "已完成初稿",
       "owner": "杨薇",
       "start_date": "2026-10-10",
-      "end_date": "2026-10-12",
-      "status": "todo",
+      "end_date": "2026-10-11",
+      "status": "done",
       "created_at": "2026-10-08T09:05:47.263Z",
-      "updated_at": "2026-10-10T09:42:12.875Z"
+      "updated_at": "2026-10-12T02:23:26.624Z"
     },
     {
       "id": "01b683b3-438b-46c5-8bc2-1c6d47221315",
@@ -229,6 +229,17 @@
       "status": "todo",
       "created_at": "2026-10-10T09:08:47.578Z",
       "updated_at": "2026-10-10T09:09:01.286Z"
+    },
+    {
+      "id": "d7ae9327-263e-41ed-bcf0-8410d5917019",
+      "title": "赵书记稿",
+      "body": "已发初稿",
+      "owner": "杨薇",
+      "start_date": "2026-10-12",
+      "end_date": "2026-10-12",
+      "status": "done",
+      "created_at": "2026-10-12T00:50:35.606Z",
+      "updated_at": "2026-10-12T02:23:37.691Z"
     }
   ]
 }
