@@ -175,7 +175,7 @@ async function exportReadonlySnapshot() {
       data: { schema_version: 1, initial_date: state.calendar.getDate().toISOString().slice(0, 10), owner_colors: state.ownerColors, events: activeEvents() },
       calendarScript, calendarCss, workbenchCss, generatedAt,
     });
-    downloadBlob(new Blob([html], { type: 'text/html;charset=utf-8' }), `团队日历只读快照-${today()}.html`);
+    downloadBlob(new Blob([html], { type: 'text/html;charset=utf-8' }), `财富团队工作日历只读快照-${today()}.html`);
     announce('只读网页已下载。文件包含本次导出的日历安排，可直接发给团队查看。');
   } catch (error) {
     announce(`生成只读网页失败：${error.message || '请刷新页面后重试。'}`, true);
@@ -340,7 +340,7 @@ function exportCalendar(startDate, endDate, label) {
     const context = canvas.getContext('2d'); context.scale(scale, scale); context.fillStyle = '#f4f7fb'; context.fillRect(0, 0, width, gridTop + gridHeight + margin);
     context.fillStyle = '#102d57'; context.fillRect(0, 0, width, 10);
     context.fillStyle = '#c72630'; context.font = '700 14px Segoe UI, Microsoft YaHei, sans-serif'; context.fillText('TEAM CALENDAR', margin, 51);
-    context.fillStyle = '#102d57'; context.font = '700 34px Segoe UI, Microsoft YaHei, sans-serif'; context.fillText('团队日历', margin, 96);
+    context.fillStyle = '#102d57'; context.font = '700 34px Segoe UI, Microsoft YaHei, sans-serif'; context.fillText('财富团队工作日历', margin, 96);
     context.fillStyle = '#60728c'; context.font = '16px Segoe UI, Microsoft YaHei, sans-serif'; context.fillText(label, margin, 128);
     context.fillStyle = '#60728c'; context.font = '13px Segoe UI, Microsoft YaHei, sans-serif'; context.fillText(`导出日期：${startDate} 至 ${endDate}`, margin, 153);
 
@@ -398,7 +398,7 @@ function exportCalendar(startDate, endDate, label) {
     context.fillText(`导出于 ${today()} · 仅供团队安排查看`, width - margin, y + 20);
     canvas.toBlob(blob => {
       if (!blob) { announce('图片生成失败，请重试。', true); return; }
-      downloadBlob(blob, `团队日历-${startDate}-${endDate}.png`);
+      downloadBlob(blob, `财富团队工作日历-${startDate}-${endDate}.png`);
       announce('日历长图已导出为 PNG。');
     }, 'image/png');
   } catch (error) { announce(error.message || '导出失败。', true); }

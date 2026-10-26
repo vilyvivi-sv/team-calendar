@@ -1,4 +1,4 @@
-# 团队日历工作台（浏览器版）
+# 财富团队工作日历（浏览器版）
 
 直接访问：<https://vilyvivi-sv.github.io/team-calendar/browser_workbench/>
 

@@ -30,19 +30,19 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#102d57">
-  <meta name="description" content="团队日历只读快照">
-  <title>团队日历只读快照</title>
+  <meta name="description" content="财富团队工作日历只读快照">
+  <title>财富团队工作日历只读快照</title>
   <style>${safeCss}</style>
   <script>${safeScript}</script>
 </head>
 <body>
-  <header class="topbar"><div class="brand"><span class="brand-mark">日历</span><span>团队工作台</span></div><span class="read-only-label">只读快照</span></header>
+  <header class="topbar"><div class="brand"><span class="brand-mark">日历</span><span>财富团队工作日历</span></div><span class="read-only-label">只读快照</span></header>
   <main class="page">
-    <section class="intro"><div><p class="eyebrow">TEAM CALENDAR · READ ONLY</p><h1>团队日历</h1><p class="muted">点击日历事项可查看详情；此文件为 ${generatedAt} 导出的静态快照。</p></div></section>
+    <section class="intro"><div><p class="eyebrow">TEAM CALENDAR · READ ONLY</p><h1>财富团队工作日历</h1><p class="muted">点击日历事项可查看详情；此文件为 ${generatedAt} 导出的静态快照。</p></div></section>
     <section class="calendar-panel">
       <div class="calendar-toolbar"><div class="date-navigation"><button id="prevButton" class="icon" aria-label="上一期">‹</button><button id="nextButton" class="icon" aria-label="下一期">›</button><button id="todayButton" class="quiet">今天</button><h2 id="calendarTitle"></h2></div><div id="views" class="segmented" aria-label="日历视图"><button data-view="dayGridMonth">月历</button><button data-view="dayGridWeek">周历</button><button data-view="listMonth">日程</button></div></div>
       <div class="filters"><label class="search-label"><span class="sr-only">搜索工作项</span><input id="search" type="search" placeholder="搜索工作项…" maxlength="200"></label><label>负责人筛选<select id="ownerFilter"><option value="">所有负责人</option></select></label><label>状态筛选<select id="statusFilter"><option value="">全部状态</option><option value="todo">待办</option><option value="done">已完成</option></select></label></div>
-      <div id="calendar" aria-label="团队日历"></div>
+      <div id="calendar" aria-label="财富团队工作日历"></div>
       <footer class="calendar-footer"><div class="calendar-legends"><div id="ownerLegend" class="legend" aria-label="执行人颜色图例"></div><div class="status-legend" aria-label="任务状态图例"><span><i class="task-status-icon is-todo" aria-hidden="true">○</i>待办</span><span><i class="task-status-icon is-done" aria-hidden="true">✓</i>已完成</span></div></div><span id="syncStatus" class="muted"></span></footer>
       <p class="usage-note">这是离线只读副本，不会修改日历。安排更新后，请维护者重新导出并发送新版文件。</p>
     </section>
