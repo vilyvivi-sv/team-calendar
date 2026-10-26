@@ -1,5 +1,6 @@
 import { buildOwnerColorMap, canEditLocally, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
 import { buildExportGrid, countLegendRows } from './export-calendar.mjs';
+import { buildReadonlyCalendarHtml } from './readonly-export.mjs';
 
 const $ = id => document.getElementById(id);
 const states = { todo: '待办', done: '已完成' };
@@ -24,7 +25,7 @@ function updateEditingAccess() {
   state.calendar?.setOption('selectable', canEdit());
 }
 function setSavingControls(disabled) {
-  for (const id of ['saveEvent', 'deleteEvent', 'closeEvent', 'refreshButton', 'restoreFile', 'backupCalendar', 'exportMonth', 'exportCustom', 'exportStart', 'exportEnd']) $(id).disabled = disabled;
+  for (const id of ['saveEvent', 'deleteEvent', 'closeEvent', 'refreshButton', 'restoreFile', 'backupCalendar', 'exportMonth', 'exportCustom', 'exportStart', 'exportEnd', 'exportReadonly']) $(id).disabled = disabled;
   document.querySelectorAll('#eventForm input, #eventForm select, #eventForm textarea').forEach(control => { control.disabled = disabled; });
   updateEditingAccess();
 }
@@ -139,6 +140,7 @@ function applyCalendarData(data) {
     state.initialDateSelected = true;
   }
   state.loaded = true;
+  $('exportReadonly').disabled = false;
   updateEditingAccess();
   updateCalendar();
 }
@@ -152,6 +154,32 @@ async function readCalendar() {
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || `读取日历失败（${response.status}）`);
   return data;
+}
+
+async function exportReadonlySnapshot() {
+  if (!state.loaded || state.saving) return;
+  const readAsset = async path => {
+    const response = await fetch(path, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`读取页面资源失败：${path}`);
+    return response.text();
+  };
+  try {
+    announce('正在生成只读网页…');
+    const [calendarScript, calendarCss, workbenchCss] = await Promise.all([
+      readAsset('./fullcalendar.global.min.js'), readAsset('./calendar.css'), readAsset('./workbench.css'),
+    ]);
+    const generatedAt = new Intl.DateTimeFormat('zh-CN', {
+      timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false,
+    }).format(new Date());
+    const html = buildReadonlyCalendarHtml({
+      data: { schema_version: 1, initial_date: state.calendar.getDate().toISOString().slice(0, 10), owner_colors: state.ownerColors, events: activeEvents() },
+      calendarScript, calendarCss, workbenchCss, generatedAt,
+    });
+    downloadBlob(new Blob([html], { type: 'text/html;charset=utf-8' }), `团队日历只读快照-${today()}.html`);
+    announce('只读网页已下载。文件包含本次导出的日历安排，可直接发给团队查看。');
+  } catch (error) {
+    announce(`生成只读网页失败：${error.message || '请刷新页面后重试。'}`, true);
+  }
 }
 
 async function refresh() {
@@ -397,6 +425,7 @@ $('deleteEvent').addEventListener('click', deleteEvent);
 $('closeEvent').addEventListener('click', () => $('eventDialog').close());
 document.querySelector('[data-close-read]').addEventListener('click', () => $('readDialog').close());
 $('backupCalendar').addEventListener('click', downloadBackup);
+$('exportReadonly').addEventListener('click', exportReadonlySnapshot);
 $('restoreFile').addEventListener('change', restoreBackup);
 $('exportMonth').addEventListener('click', () => {
   const [start, end] = getVisibleMonthRange();
