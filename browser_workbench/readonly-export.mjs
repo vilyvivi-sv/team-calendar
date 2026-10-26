@@ -5,7 +5,15 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
     initial_date: data.initial_date || new Date().toISOString().slice(0, 10),
     owner_colors: data.owner_colors || {},
     // Deleted items stay in the source calendar's recycle bin and are excluded from shared snapshots.
-    events: (data.events || []).filter(item => !item.deleted_at),
+    events: (data.events || []).filter(item => !item.deleted_at).map(item => ({
+      id: item.id,
+      title: item.title,
+      body: item.body || '',
+      owner: item.owner || '',
+      start_date: item.start_date,
+      end_date: item.end_date,
+      status: item.status === 'done' ? 'done' : 'todo',
+    })),
   };
   const safeJson = JSON.stringify(snapshot)
     .replace(/</g, '\\u003c')
