@@ -1,6 +1,6 @@
 import { buildOwnerColorMap, canEditLocally, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
 import { buildExportGrid, countLegendRows } from './export-calendar.mjs';
-import { buildReadonlyCalendarHtml } from './readonly-export.mjs';
+import { buildReadonlyCalendarHtml } from './readonly-export.mjs?v=1787c35';
 
 const $ = id => document.getElementById(id);
 const states = { todo: '待办', done: '已完成' };
