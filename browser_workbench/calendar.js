@@ -104,7 +104,7 @@ function renderCalendar() {
     firstDay: 1, headerToolbar: false, height: 'auto', fixedWeekCount: false,
     views: {
       dayGridMonth: { visibleRange: monthContentRange, dateIncrement: { months: 1 } },
-      continuousWeeks: { type: 'dayGrid', duration: { weeks: 52 }, dateIncrement: { months: 1 }, buttonText: '连续周' },
+      continuousWeeks: { type: 'dayGrid', duration: { weeks: 52 }, dateAlignment: 'week', dateIncrement: { months: 1 }, buttonText: '连续周' },
     },
     locale: { code: 'zh-cn', week: { dow: 1, doy: 4 }, buttonText: { today: '今天', month: '月', week: '周', list: '日程' }, allDayText: '全天', noEventsText: '当前范围暂无工作项' },
     titleFormat: { year: 'numeric', month: 'long' }, dayMaxEvents: false, dayMaxEventRows: false,

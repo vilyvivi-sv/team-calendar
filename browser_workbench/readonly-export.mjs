@@ -76,7 +76,7 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
         initialView: mobile.matches ? 'listMonth' : 'dayGridMonth', initialDate: data.initial_date,
         timeZone: 'UTC', firstDay: 1, headerToolbar: false, height: 'auto', fixedWeekCount: false,
         locale: { code: 'zh-cn', week: { dow: 1, doy: 4 }, buttonText: { today: '今天', month: '月', week: '周', list: '日程' }, allDayText: '全天', noEventsText: '当前范围暂无工作项' },
-        views: { continuousWeeks: { type: 'dayGrid', duration: { weeks: 52 }, dateIncrement: { months: 1 }, buttonText: '连续周' } },
+        views: { continuousWeeks: { type: 'dayGrid', duration: { weeks: 52 }, dateAlignment: 'week', dateIncrement: { months: 1 }, buttonText: '连续周' } },
         titleFormat: { year: 'numeric', month: 'long' }, dayMaxEvents: false, dayMaxEventRows: false,
         editable: false, selectable: false, events: [],
         datesSet: () => {
