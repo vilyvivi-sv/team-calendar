@@ -1,6 +1,6 @@
 import { buildOwnerColorMap, canEditLocally, getOwnerPresentation, normalizeStatus, splitOwners } from './calendar-ui.mjs';
 import { buildExportGrid, countLegendRows } from './export-calendar.mjs';
-import { buildReadonlyCalendarHtml } from './readonly-export.mjs?v=1787c35';
+import { buildReadonlyCalendarHtml } from './readonly-export.mjs?v=continuous-weeks-1';
 
 const $ = id => document.getElementById(id);
 const states = { todo: '待办', done: '已完成' };
@@ -12,34 +12,6 @@ const state = { calendar: null, events: [], ownerColors: {}, filterTimer: null, 
 const addDays = (date, n) => { const value = new Date(`${date}T00:00:00Z`); value.setUTCDate(value.getUTCDate() + n); return value.toISOString().slice(0, 10); };
 const today = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const mondayOf = date => addDays(date, -((new Date(`${date}T00:00:00Z`).getUTCDay() + 6) % 7));
-const dayOrdinal = date => Math.floor(Date.parse(`${date}T00:00:00Z`) / 86_400_000);
-const ordinalDate = value => new Date(value * 86_400_000).toISOString().slice(0, 10);
-const mondayOrdinal = value => value - ((new Date(value * 86_400_000).getUTCDay() + 6) % 7);
-
-function syncWeekNavigator() {
-  if (!state.calendar) return;
-  const slider = $('weekNavigator');
-  const currentDate = state.calendar.getDate().toISOString().slice(0, 10);
-  const currentOrdinal = dayOrdinal(currentDate);
-  const anchors = [dayOrdinal(today()) - 365 * 5, dayOrdinal(today()) + 365 * 5, currentOrdinal - 365, currentOrdinal + 365];
-  for (const row of activeEvents()) anchors.push(dayOrdinal(row.start_date), dayOrdinal(row.end_date));
-  const minimum = mondayOrdinal(Math.min(...anchors));
-  const maximum = mondayOrdinal(Math.max(...anchors));
-  const weekStart = mondayOrdinal(currentOrdinal);
-  slider.min = String(minimum);
-  slider.max = String(maximum);
-  slider.step = '7';
-  slider.value = String(weekStart);
-  slider.disabled = !state.loaded || state.saving;
-  $('weekNavigation').hidden = state.calendar.view.type === 'listMonth';
-  const weekEnd = ordinalDate(weekStart + 6);
-  const yearLabel = ordinalDate(weekStart).slice(0, 4) === weekEnd.slice(0, 4)
-    ? `${ordinalDate(weekStart).slice(0, 4)}年`
-    : `${ordinalDate(weekStart).slice(0, 4)}-${weekEnd.slice(0, 4)}年`;
-  $('weekNavigatorLabel').textContent = `${yearLabel}\n${ordinalDate(weekStart).slice(5)} — ${weekEnd.slice(5)}`;
-  slider.setAttribute('aria-valuetext', `${ordinalDate(weekStart)} 至 ${ordinalDate(weekStart + 6)}`);
-}
-
 function announce(message, warning = false) {
   $('statusBanner').textContent = message;
   $('statusBanner').hidden = !message;
@@ -52,7 +24,7 @@ function updateEditingAccess() {
   state.calendar?.setOption('selectable', canEdit());
 }
 function setSavingControls(disabled) {
-  for (const id of ['saveEvent', 'deleteEvent', 'closeEvent', 'refreshButton', 'restoreFile', 'backupCalendar', 'exportMonth', 'exportCustom', 'exportStart', 'exportEnd', 'exportReadonly', 'weekNavigator']) $(id).disabled = disabled;
+  for (const id of ['saveEvent', 'deleteEvent', 'closeEvent', 'refreshButton', 'restoreFile', 'backupCalendar', 'exportMonth', 'exportCustom', 'exportStart', 'exportEnd', 'exportReadonly']) $(id).disabled = disabled;
   document.querySelectorAll('#eventForm input, #eventForm select, #eventForm textarea').forEach(control => { control.disabled = disabled; });
   updateEditingAccess();
 }
@@ -130,11 +102,23 @@ function renderCalendar() {
   state.calendar = new FullCalendar.Calendar($('calendar'), {
     initialView: mobile.matches ? 'listMonth' : 'dayGridMonth', initialDate: today(), timeZone: 'UTC', now: () => `${today()}T00:00:00Z`,
     firstDay: 1, headerToolbar: false, height: 'auto', fixedWeekCount: false,
-    views: { dayGridMonth: { visibleRange: monthContentRange, dateIncrement: { months: 1 } } },
+    views: {
+      dayGridMonth: { visibleRange: monthContentRange, dateIncrement: { months: 1 } },
+      continuousWeeks: { type: 'dayGrid', duration: { weeks: 52 }, dateIncrement: { months: 1 }, buttonText: '连续周' },
+    },
     locale: { code: 'zh-cn', week: { dow: 1, doy: 4 }, buttonText: { today: '今天', month: '月', week: '周', list: '日程' }, allDayText: '全天', noEventsText: '当前范围暂无工作项' },
     titleFormat: { year: 'numeric', month: 'long' }, dayMaxEvents: false, dayMaxEventRows: false,
     editable: canEdit(), selectable: canEdit(), eventResizableFromStart: true, events: [],
-    datesSet: () => { $('calendarTitle').textContent = state.calendar.view.title; updateViewButtons(); syncWeekNavigator(); },
+    datesSet: () => {
+      const continuous = state.calendar.view.type === 'continuousWeeks';
+      $('calendarScroller').classList.toggle('is-continuous', continuous);
+      if (continuous) {
+        const first = state.calendar.view.currentStart.toISOString().slice(0, 10);
+        const last = addDays(state.calendar.view.currentEnd.toISOString().slice(0, 10), -1);
+        $('calendarTitle').textContent = `连续周 · ${first} 至 ${last}`;
+      } else $('calendarTitle').textContent = state.calendar.view.title;
+      updateViewButtons();
+    },
     dateClick: info => { if (canEdit()) openEditor(null, { start_date: info.dateStr, end_date: info.dateStr }); },
     select: info => { if (canEdit()) openEditor(null, { start_date: info.startStr.slice(0, 10), end_date: addDays(info.endStr.slice(0, 10), -1) }); state.calendar.unselect(); },
     eventClick: info => canEdit() ? openEditor(info.event.extendedProps.row) : showReadOnly(info.event.extendedProps.row), eventDrop: persistDrag, eventResize: persistDrag,
@@ -168,7 +152,6 @@ function applyCalendarData(data) {
   }
   state.loaded = true;
   $('exportReadonly').disabled = false;
-  syncWeekNavigator();
   updateEditingAccess();
   updateCalendar();
 }
@@ -445,10 +428,6 @@ $('prevButton').addEventListener('click', () => state.calendar.prev());
 $('nextButton').addEventListener('click', () => state.calendar.next());
 $('todayButton').addEventListener('click', () => state.calendar.gotoDate(today()));
 document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => state.calendar.changeView(button.dataset.view)));
-$('weekNavigator').addEventListener('input', event => {
-  const weekStart = ordinalDate(Number(event.currentTarget.value));
-  state.calendar.changeView('dayGridWeek', weekStart);
-});
 for (const id of ['ownerFilter', 'statusFilter']) $(id).addEventListener('change', updateCalendar);
 $('search').addEventListener('input', () => { clearTimeout(state.filterTimer); state.filterTimer = setTimeout(updateCalendar, 200); });
 $('refreshButton').addEventListener('click', refresh);

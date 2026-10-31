@@ -40,9 +40,9 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
   <main class="page">
     <section class="intro"><div><p class="eyebrow">TEAM CALENDAR · READ ONLY</p><h1>财富团队工作日历</h1><p class="muted">点击日历事项可查看详情；此文件为 ${generatedAt} 导出的静态快照。</p></div></section>
     <section class="calendar-panel">
-      <div class="calendar-toolbar"><div class="date-navigation"><button id="prevButton" class="icon" aria-label="上一期">‹</button><button id="nextButton" class="icon" aria-label="下一期">›</button><button id="todayButton" class="quiet">今天</button><h2 id="calendarTitle"></h2></div><div id="views" class="segmented" aria-label="日历视图"><button data-view="dayGridMonth">月历</button><button data-view="dayGridWeek">周历</button><button data-view="listMonth">日程</button></div></div>
+      <div class="calendar-toolbar"><div class="date-navigation"><button id="prevButton" class="icon" aria-label="上一期">‹</button><button id="nextButton" class="icon" aria-label="下一期">›</button><button id="todayButton" class="quiet">今天</button><h2 id="calendarTitle"></h2></div><div id="views" class="segmented" aria-label="日历视图"><button data-view="dayGridMonth">月历</button><button data-view="dayGridWeek">周历</button><button data-view="listMonth">日程</button><button data-view="continuousWeeks">连续周</button></div></div>
       <div class="filters"><label class="search-label"><span class="sr-only">搜索工作项</span><input id="search" type="search" placeholder="搜索工作项…" maxlength="200"></label><label>负责人筛选<select id="ownerFilter"><option value="">所有负责人</option></select></label><label>状态筛选<select id="statusFilter"><option value="">全部状态</option><option value="todo">待办</option><option value="done">已完成</option></select></label></div>
-      <div class="calendar-with-week-navigation"><div id="calendar" aria-label="财富团队工作日历"></div><aside id="weekNavigation" class="week-navigation" aria-label="按周定位"><label for="weekNavigator">周导航</label><input id="weekNavigator" type="range" min="0" max="1" step="7" value="0" aria-label="拖动定位到某一周" aria-orientation="vertical" disabled><output id="weekNavigatorLabel" for="weekNavigator">读取日历中</output></aside></div>
+      <div id="calendarScroller" class="calendar-scroller"><div id="calendar" aria-label="财富团队工作日历"></div></div>
       <footer class="calendar-footer"><div class="calendar-legends"><div id="ownerLegend" class="legend" aria-label="执行人颜色图例"></div><div class="status-legend" aria-label="任务状态图例"><span><i class="task-status-icon is-todo" aria-hidden="true">○</i>待办</span><span><i class="task-status-icon is-done" aria-hidden="true">✓</i>已完成</span></div></div><span id="syncStatus" class="muted"></span></footer>
       <p class="usage-note">这是离线只读副本，不会修改日历。安排更新后，请维护者重新导出并发送新版文件。</p>
     </section>
@@ -57,9 +57,6 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
         value.setUTCDate(value.getUTCDate() + count);
         return value.toISOString().slice(0, 10);
       };
-      const dayOrdinal = date => Math.floor(Date.parse(date + 'T00:00:00Z') / 86400000);
-      const ordinalDate = value => new Date(value * 86400000).toISOString().slice(0, 10);
-      const mondayOrdinal = value => value - ((new Date(value * 86400000).getUTCDay() + 6) % 7);
       const splitOwners = value => [...new Set(String(value || '').split(/[、，,；;]+/).map(name => name.trim()).filter(Boolean))];
       const hashOwner = name => {
         let hash = 2166136261;
@@ -79,9 +76,19 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
         initialView: mobile.matches ? 'listMonth' : 'dayGridMonth', initialDate: data.initial_date,
         timeZone: 'UTC', firstDay: 1, headerToolbar: false, height: 'auto', fixedWeekCount: false,
         locale: { code: 'zh-cn', week: { dow: 1, doy: 4 }, buttonText: { today: '今天', month: '月', week: '周', list: '日程' }, allDayText: '全天', noEventsText: '当前范围暂无工作项' },
+        views: { continuousWeeks: { type: 'dayGrid', duration: { weeks: 52 }, dateIncrement: { months: 1 }, buttonText: '连续周' } },
         titleFormat: { year: 'numeric', month: 'long' }, dayMaxEvents: false, dayMaxEventRows: false,
         editable: false, selectable: false, events: [],
-        datesSet: () => { $('calendarTitle').textContent = calendar.view.title; updateViewButtons(); syncWeekNavigator(); },
+        datesSet: () => {
+          const continuous = calendar.view.type === 'continuousWeeks';
+          $('calendarScroller').classList.toggle('is-continuous', continuous);
+          if (continuous) {
+            const first = calendar.view.currentStart.toISOString().slice(0, 10);
+            const last = addDays(calendar.view.currentEnd.toISOString().slice(0, 10), -1);
+            $('calendarTitle').textContent = '连续周 · ' + first + ' 至 ' + last;
+          } else $('calendarTitle').textContent = calendar.view.title;
+          updateViewButtons();
+        },
         eventClick: info => showDetails(info.event.extendedProps.item),
         eventContent: info => {
           const icon = document.createElement('span');
@@ -100,23 +107,6 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
           button.classList.toggle('active', active);
           button.setAttribute('aria-pressed', String(active));
         });
-      }
-      function syncWeekNavigator() {
-        const slider = $('weekNavigator');
-        const currentDate = calendar.getDate().toISOString().slice(0, 10);
-        const currentOrdinal = dayOrdinal(currentDate);
-        const anchors = [dayOrdinal(data.initial_date) - 365 * 5, dayOrdinal(data.initial_date) + 365 * 5, currentOrdinal - 365, currentOrdinal + 365];
-        for (const item of items) anchors.push(dayOrdinal(item.start_date), dayOrdinal(item.end_date));
-        const minimum = mondayOrdinal(Math.min(...anchors));
-        const maximum = mondayOrdinal(Math.max(...anchors));
-        const weekStart = mondayOrdinal(currentOrdinal);
-        slider.min = String(minimum); slider.max = String(maximum); slider.step = '7'; slider.value = String(weekStart); slider.disabled = false;
-        $('weekNavigation').hidden = calendar.view.type === 'listMonth';
-        const weekEnd = ordinalDate(weekStart + 6);
-        const firstYear = ordinalDate(weekStart).slice(0, 4);
-        const yearLabel = firstYear === weekEnd.slice(0, 4) ? firstYear + '年' : firstYear + '-' + weekEnd.slice(0, 4) + '年';
-        $('weekNavigatorLabel').textContent = yearLabel + '\n' + ordinalDate(weekStart).slice(5) + ' — ' + weekEnd.slice(5);
-        slider.setAttribute('aria-valuetext', ordinalDate(weekStart) + ' 至 ' + ordinalDate(weekStart + 6));
       }
       function updateLegend() {
         const names = [...new Set(items.flatMap(item => splitOwners(item.owner)))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
@@ -161,7 +151,6 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
       $('prevButton').addEventListener('click', () => calendar.prev());
       $('nextButton').addEventListener('click', () => calendar.next());
       $('todayButton').addEventListener('click', () => calendar.today());
-      $('weekNavigator').addEventListener('input', event => calendar.changeView('dayGridWeek', ordinalDate(Number(event.currentTarget.value))));
       document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => calendar.changeView(button.dataset.view)));
       $('ownerFilter').addEventListener('change', refreshEvents);
       $('statusFilter').addEventListener('change', refreshEvents);
@@ -179,4 +168,4 @@ export function buildReadonlyCalendarHtml({ data, calendarScript, calendarCss, w
 }
 
 const viewerCss = `
-.fc .fc-daygrid-day-frame{height:auto;min-height:100%;overflow:visible}.fc .fc-daygrid-day-events{min-height:0;overflow:visible}.fc .fc-daygrid-event-harness{flex:none}.fc .fc-daygrid-event{white-space:normal;line-height:1.3;cursor:pointer}.fc .task-event-title{white-space:normal;overflow-wrap:anywhere}.fc .fc-daygrid-event .task-status-icon,.fc .fc-list-event-title .task-status-icon{margin-right:4px}.task-status-icon.is-todo,.task-status-icon.is-done{color:#51627a}.fc .fc-daygrid-more-link{display:none}.readonly-note{font-size:12px;line-height:1.7;color:#77849a;margin:14px 3px}.readonly-intro{align-items:center}.fc .fc-event{cursor:pointer}@media(max-width:767px){.topbar{height:54px;padding:0 15px}.page{margin:17px auto;padding:0 12px}.calendar-panel{border-radius:12px;padding:13px}.intro{margin-top:16px}.intro h1{font-size:25px}.intro .muted{font-size:13px}.calendar-toolbar{align-items:flex-start;flex-direction:column}.date-navigation{width:100%}.date-navigation h2{flex:1}.segmented{align-self:stretch}.segmented button{flex:1}.filters{display:grid;grid-template-columns:1fr 1fr}.search-label{grid-column:1/-1}.calendar-footer{align-items:flex-start;flex-direction:column;gap:10px}.calendar-legends{gap:9px}.calendar-legends .legend{gap:6px 11px}.fc .fc-list-event-title{white-space:normal}.fc .fc-list-event-time{width:0;font-size:0}}`;
+.fc .fc-daygrid-day-frame{height:auto;min-height:100%;overflow:visible}.fc .fc-daygrid-day-events{min-height:0;overflow:visible}.fc .fc-daygrid-event-harness{flex:none}.fc .fc-daygrid-event{white-space:normal;line-height:1.3;cursor:pointer}.fc .task-event-title{white-space:normal;overflow-wrap:anywhere}.fc .fc-daygrid-event .task-status-icon,.fc .fc-list-event-title .task-status-icon{margin-right:4px}.task-status-icon.is-todo,.task-status-icon.is-done{color:#51627a}.fc .fc-daygrid-more-link{display:none}.readonly-note{font-size:12px;line-height:1.7;color:#77849a;margin:14px 3px}.readonly-intro{align-items:center}.fc .fc-event{cursor:pointer}.calendar-scroller{min-width:0}.calendar-scroller.is-continuous{height:min(72vh,900px);min-height:420px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable}.calendar-scroller.is-continuous::-webkit-scrollbar{width:14px}.calendar-scroller.is-continuous::-webkit-scrollbar-track{background:#edf1f6;border-radius:8px}.calendar-scroller.is-continuous::-webkit-scrollbar-thumb{background:#aebbd0;border:3px solid #edf1f6;border-radius:8px}.calendar-scroller.is-continuous::-webkit-scrollbar-thumb:hover{background:#7f91ab}@media(max-width:767px){.topbar{height:54px;padding:0 15px}.page{margin:17px auto;padding:0 12px}.calendar-panel{border-radius:12px;padding:13px}.intro{margin-top:16px}.intro h1{font-size:25px}.intro .muted{font-size:13px}.calendar-toolbar{align-items:flex-start;flex-direction:column}.date-navigation{width:100%}.date-navigation h2{flex:1}.segmented{align-self:stretch}.segmented button{flex:1}.filters{display:grid;grid-template-columns:1fr 1fr}.search-label{grid-column:1/-1}.calendar-footer{align-items:flex-start;flex-direction:column;gap:10px}.calendar-legends{gap:9px}.calendar-legends .legend{gap:6px 11px}.fc .fc-list-event-title{white-space:normal}.fc .fc-list-event-time{width:0;font-size:0}.calendar-scroller.is-continuous{height:65vh;min-height:360px}}`;
